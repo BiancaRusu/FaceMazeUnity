@@ -13,7 +13,7 @@ public class globalVariables{
 	//player business
 	public static string userFbId;
 	public static string fbName;
-    public static string profilePictureUrl;
-	public int score;
+	public static string playerPictureUrl;
+	public static int score;
 	public int bestScore;
 }

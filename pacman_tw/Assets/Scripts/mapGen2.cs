@@ -172,16 +172,13 @@ public class mapGen2 : MonoBehaviour {
 			for (int i = 0; i <= 4; i++) {
 				if (map [boardHeight / 2 + randomZ - 2 + i, boardWidth / 2 + randomX] == 1) {
 					ok = false;
-					Debug.Log ("Capete");
 				}
 				if (map [boardHeight / 2 + randomZ - 1 + i, boardWidth / 2 + randomX - 1] == 1) {
 					ok = false;
-					Debug.Log ("left Side");
 
 				}
 				if (map [boardHeight / 2 + randomZ - 1 + i, boardWidth / 2 + randomX + 1] == 1) {
 					ok = false;
-					Debug.Log ("right Side");
 
 				}
 			}
@@ -223,6 +220,22 @@ public class mapGen2 : MonoBehaviour {
 
 		}
 
+		toGen = 0;
+		while (toGen <= 50) {
+			randomZ = Random.Range (-boardHeight / 2 + 3, boardHeight / 2 - 3);
+			randomX = Random.Range (-boardWidth / 2 + 3, boardWidth / 2 - 3);
+			ok = true;
+			if (map [boardHeight / 2 + randomZ, boardWidth / 2 + randomX] == 1)
+				ok = false;
+
+			if (ok) {
+				GameObject coin = (GameObject)Instantiate (Resources.Load ("coin"));
+				coin.transform.position = new Vector3 (randomX, 0.75f, randomZ);
+				map [boardHeight / 2 + randomZ, boardWidth / 2 + randomX] = 1;
+				toGen++;
+			}
+
+		}
 	
 	}
 }
