@@ -10,7 +10,6 @@ public class FBholder : MonoBehaviour {
 	public GameObject ghost2;
 	public GameObject ghost3;
 	public GameObject pacmanJPG;
-	public GameObject guestButton;
 
 	// Use this for initialization
 	void Awake ()
@@ -21,6 +20,8 @@ public class FBholder : MonoBehaviour {
 	private void SetInit(){
 		if (FB.IsLoggedIn) {
 			Debug.Log ("FB Logged in");
+			FB.API ("/me?fields=id,name,picture.width(500).height(500)", HttpMethod.GET, userId);
+			FB.API ("/me/invitable_friends?limit=500&fields=id,name,picture.width(500).height(500)", HttpMethod.GET, friendsPhotos);
 		} else {
 			Debug.Log ("FB not logged in");
 		}
@@ -37,10 +38,18 @@ public class FBholder : MonoBehaviour {
 	}
 
 	public void FBLogin(){
-		List<string> permissions = new List<string> ();
-		permissions.Add ("public_profile");
-		permissions.Add ("user_friends");
-		FB.LogInWithReadPermissions (permissions, AuthCallBack);
+		if (!FB.IsLoggedIn) {
+			List<string> permissions = new List<string> ();
+			permissions.Add ("public_profile");
+			permissions.Add ("user_friends");
+			globalVariables.FBLogged = true;
+			FB.LogInWithReadPermissions (permissions, AuthCallBack);
+		} else {
+			FB.LogOut ();
+			dealWithThings (false);
+			globalVariables.FBLogged = false;
+
+		}
 	}
 
 	void AuthCallBack(IResult result){
@@ -48,10 +57,12 @@ public class FBholder : MonoBehaviour {
 			Debug.Log (result.Error);
 		} else {
 			if (FB.IsLoggedIn) {
+				globalVariables.FBLogged = true;
 				Debug.Log ("FB logged in");
-				FB.API ("/me?fields=id,name,picture.width(100).height(100)", HttpMethod.GET, userId);
-				FB.API ("/me/invitable_friends?limit=500&fields=id,name,picture.width(100).height(100)", HttpMethod.GET, friendsPhotos);
+				FB.API ("/me?fields=id,name,picture.width(500).height(500)", HttpMethod.GET, userId);
+				FB.API ("/me/invitable_friends?limit=500&fields=id,name,picture.width(500).height(500)", HttpMethod.GET, friendsPhotos);
 			} else {
+				globalVariables.FBLogged = false;
 				Debug.Log ("FB not logged in");
 			}
 			dealWithThings (FB.IsLoggedIn);
@@ -98,11 +109,13 @@ public class FBholder : MonoBehaviour {
 
 			}
 
-			charactersAvatars charactersPhotos = new charactersAvatars ();
-			charactersPhotos.ShowGhosts ();
+			this.gameObject.AddComponent<CharactersAvatars> ();
+			CharactersAvatars ca = this.GetComponent<CharactersAvatars> ();
+			ca.setTextures ();
 
-			storeAndRetrieveData store = new storeAndRetrieveData ();
-			store.start ();
+			this.gameObject.AddComponent<storeAndRetrieveData> ();
+			storeAndRetrieveData s = this.GetComponent<storeAndRetrieveData> ();
+			s.showScore ();
 		}
 	}
 
@@ -114,7 +127,6 @@ public class FBholder : MonoBehaviour {
 			ghost2.SetActive (true);
 			ghost3.SetActive (true);
 			pacmanJPG.SetActive (true);
-			guestButton.SetActive (false);
 			if (GameObject.Find ("InputName") != null) {
 				GameObject.Find ("InputName").SetActive (false);
 			}
@@ -125,7 +137,6 @@ public class FBholder : MonoBehaviour {
 			ghost2.SetActive (false);
 			ghost3.SetActive (false);
 			pacmanJPG.SetActive (false);
-			guestButton.SetActive (true);
 		}
 	}
 		

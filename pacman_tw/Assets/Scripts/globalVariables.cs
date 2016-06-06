@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class globalVariables{
+public static class globalVariables{
 
 	//ghosts business;
 	public static List<string> ghostsUrls = new List<string>();
@@ -15,5 +15,13 @@ public class globalVariables{
 	public static string fbName;
 	public static string playerPictureUrl;
 	public static int score;
-	public int bestScore;
+	public static int totalScore;
+	public static int bestScore;
+	public static bool FBLogged;
+	public static bool gameStarted;
+
+	//map
+	public static int[,] map;
+	public static int boardheight;
+	public static int boardwidth;
 }
