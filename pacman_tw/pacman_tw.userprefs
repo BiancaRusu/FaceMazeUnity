@@ -1,14 +1,11 @@
-﻿<Properties StartupItem="pacman_tw.CSharp.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\LevelManagement.cs">
+﻿<Properties StartupItem="Assembly-CSharp.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\FacebookSDK\SDK\Scripts\Utils\FacebookLogger.cs">
     <Files>
-      <File FileName="Assets\Scripts\CharactersAvatars.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\playerMovement.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\GhostMovement.cs" Line="108" Column="15" />
-      <File FileName="Assets\Scripts\LevelManagement.cs" Line="37" Column="1" />
-      <File FileName="Assets\Scripts\coin.cs" Line="13" Column="3" />
-      <File FileName="Assets\Audio\muteSound.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\FBholder.cs" Line="68" Column="1" />
+      <File FileName="Assets\Scripts\Model\globalVariables.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Controller\AudioController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Controller\ShareOnTwitteControllerr.cs" Line="1" Column="1" />
+      <File FileName="Assets\FacebookSDK\SDK\Scripts\Utils\FacebookLogger.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
